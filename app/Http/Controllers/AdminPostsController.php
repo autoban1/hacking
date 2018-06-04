@@ -91,7 +91,13 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.posts.edit');
+
+
+        $post = Post::findOrFail($id);
+
+        $categories = Category::lists('name','id')->all();
+
+        return view('admin.posts.edit',compact('post','categories'));
     }
 
     /**
@@ -103,7 +109,23 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+//pravimo ime, vreme + orignal ime
+            $name = time(). $file->getClientOriginalName();
+//prebacimo fajl u images folder
+            $file->move('images',$name);
+//pravimo sliku u bazi
+            $photo = Photo::create(['file'=>$name]);
+//u polje za post ubacujemo id iz PHOTO
+            $input['photo_id'] = $photo->id;
+        }
+
+        Auth::user()->posts()->whereId($id)->first()->update($input);
+
+        return redirect('/admin/posts');
+
     }
 
     /**
@@ -114,6 +136,13 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+
+        $post->photo ? unlink(public_path() . $post->photo->file) : ' ' ;
+
+        $post->delete();
+
+        return redirect('/admin/posts');
     }
 }
