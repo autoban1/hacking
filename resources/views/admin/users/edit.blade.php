@@ -42,7 +42,7 @@
 
     <div class="form-group">
 
-        {!! Form::submit('Napravi usera', ['class'=>'btn btn-primary col-sm-6']) !!}
+        {!! Form::submit('EDIT USER', ['class'=>'btn btn-primary col-sm-6']) !!}
 
     </div>
 

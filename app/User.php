@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','is_active','role_id','photo_id'
+        'name', 'email', 'password', 'is_active', 'role_id', 'photo_id'
     ];
 
     /**
@@ -24,20 +24,23 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function role(){
+    public function role()
+    {
 
         return $this->belongsTo('App\Role');
     }
 
-    public function photo(){
+    public function photo()
+    {
 
         return $this->belongsTo('App\Photo');
 
     }
 
-    public function isAdmin(){
+    public function isAdmin()
+    {
 
-        if($this->role->name == "administrator" && $this->is_active == "1"){
+        if ($this->role->name == "administrator" && $this->is_active == "1") {
 
             return true;
 
@@ -47,10 +50,20 @@ class User extends Authenticatable
 
     }
 
-    public function posts(){
+    public function posts()
+    {
 
         return $this->hasMany('App\Post');
     }
 
+
+    public function getGravatarAttribute()
+    {
+
+        $hash = md5(strtolower(trim($this->attributes['email'])));
+
+        return "http://www.gravatar.com/avatar/$hash";
+
+    }
 
 }

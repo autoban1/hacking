@@ -1,1 +1,1 @@
-{"version":3,"sources":["app.css"],"names":[],"mappings":"AAAA","file":"app.css","sourcesContent":[]}
+{"version":3,"sources":["app.scss"],"names":[],"mappings":"AAEA;EAEE,qBAAqB,EACtB;;AAED;EAEE,iBAAiB,EAElB;;AAED;EAEE,cAAc,EAEf","file":"app.css","sourcesContent":["// @import \"node_modules/bootstrap-sass/assets/stylesheets/bootstrap\";\n\n.greska1 {\n\n  padding-bottom: 65px;\n}\n\n#nested-comment {\n\n  margin-top: 60px;\n\n}\n\n.comment-reply {\n\n  display: none;\n\n}"]}
