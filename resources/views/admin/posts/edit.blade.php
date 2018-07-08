@@ -3,6 +3,8 @@
 
 
 @section('content')
+@include('includes.tinyeditor')
+
 
     <h1>EDIT POST</h1>
 
